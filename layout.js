@@ -468,9 +468,7 @@ function initLiveChat() {
                 <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
                 <button id="chat-send" class="chat-send"><i class="fas fa-paper-plane"></i></button>
             </div>
-            <div style="font-size: 0.65rem; color: #94a3b8; text-align: center; padding-bottom: 8px; background-color: #ffffff; border-top: 1px solid #f1f5f9;">
-                powered by <strong>Star Virtual Agents</strong>
-            </div>
+           
         </div>
     `;
     document.body.appendChild(chatContainer);
