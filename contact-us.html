@@ -6,52 +6,1103 @@
     <title>Contact Us | Quintera</title>
     <meta name="description" content="Get in touch with Quintera. Contact our toll-free lines or submit your request via our interactive advisor form.">
     <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Main Style Guide -->
     <link rel="stylesheet" href="./style.css">
     <style>
+        /* ========================================
+                   Quintera BRAND COLORS
+                ======================================== */
+        :root {
+            --Quintera-primary: #0A1628;
+            --Quintera-secondary: #00A3E0;
+            --Quintera-accent: #4FC3F7;
+            --Quintera-gold: #F5A623;
+            --Quintera-light: #E8F4FD;
+            --Quintera-text-light: #FFFFFF;
+            --Quintera-text-muted: #B0C4DE;
+            --Quintera-border: #1A3A5C;
+            --Quintera-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+            --Quintera-glow: 0 0 60px rgba(0, 163, 224, 0.15);
+            --Quintera-glow-hover: 0 0 80px rgba(0, 163, 224, 0.25);
+        }
+
+        /* Override CSS Variables */
+        body {
+            --primary-color: var(--Quintera-primary);
+            --primary-light: #132A4A;
+            --secondary-color: var(--Quintera-secondary);
+            --secondary-hover: #0088B8;
+            --accent-color: var(--Quintera-text-muted);
+            --bg-dark: var(--Quintera-primary);
+            --bg-light: var(--Quintera-primary);
+            --bg-white: #0F2440;
+            --text-light: var(--Quintera-text-light);
+            --text-muted: var(--Quintera-text-muted);
+            --border-color: var(--Quintera-border);
+        }
+
+        /* ========================================
+                   PAGE HERO - PREMIUM
+                ======================================== */
+        .page-hero {
+            background: linear-gradient(160deg, #0A1628 0%, #0A2A4A 40%, #0F1F3A 70%, #0A1628 100%);
+            padding: 100px 0 70px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(0, 163, 224, 0.15);
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: -60%;
+            right: -10%;
+            width: 70%;
+            height: 200%;
+            background: radial-gradient(ellipse, rgba(0, 163, 224, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--Quintera-secondary), var(--Quintera-accent), transparent);
+            animation: shimmerBorder 4s ease infinite;
+        }
+
+        @keyframes shimmerBorder {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .page-hero .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-hero .breadcrumbs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            align-items: center;
+            color: var(--Quintera-text-muted);
+        }
+
+        .page-hero .breadcrumbs a {
+            color: var(--Quintera-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .page-hero .breadcrumbs a:hover {
+            color: var(--Quintera-accent);
+        }
+
+        .page-hero .breadcrumbs .separator {
+            opacity: 0.3;
+        }
+
+        .page-hero h1 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #FFFFFF 20%, var(--Quintera-secondary) 60%, var(--Quintera-accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-hero .hero-subtitle {
+            color: var(--Quintera-text-muted);
+            font-size: 1.15rem;
+            max-width: 550px;
+            line-height: 1.8;
+            opacity: 0.85;
+        }
+
+        /* ========================================
+                   HERO STATS - PREMIUM COUNTERS
+                ======================================== */
+        .hero-stats {
+            display: flex;
+            gap: 50px;
+            margin-top: 35px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            position: relative;
+        }
+
+        .hero-stats::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--Quintera-secondary), var(--Quintera-accent));
+            border-radius: 2px;
+        }
+
+        .hero-stats .stat-item {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 0 10px;
+        }
+
+        .hero-stats .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .hero-stats .stat-number-wrapper {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+
+        .hero-stats .stat-number {
+            font-size: 2.4rem;
+            font-weight: 900;
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, var(--Quintera-secondary), var(--Quintera-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+
+        .hero-stats .stat-suffix {
+            font-size: 1.6rem;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            color: var(--Quintera-secondary);
+            line-height: 1;
+        }
+
+        .hero-stats .stat-label {
+            font-size: 0.8rem;
+            color: var(--Quintera-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            opacity: 0.6;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .hero-stats .stat-progress {
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-stats .stat-progress-bar {
+            height: 100%;
+            border-radius: 2px;
+            background: linear-gradient(90deg, var(--Quintera-secondary), var(--Quintera-accent));
+            width: 0%;
+            transition: width 2s ease;
+        }
+
+        .hero-stats .stat-progress-bar.animated {
+            width: 100%;
+        }
+
+        /* ========================================
+                   SECTION BADGE
+                ======================================== */
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 163, 224, 0.08);
+            border: 1px solid rgba(0, 163, 224, 0.15);
+            padding: 6px 18px;
+            border-radius: 50px;
+            color: var(--Quintera-secondary);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-badge i {
+            font-size: 0.6rem;
+        }
+
+        /* ========================================
+                   CONTACT INFO BOX - ULTRA PREMIUM
+                ======================================== */
         .contact-info-box {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            padding: 40px;
-            border-radius: var(--radius-lg);
+            background: linear-gradient(160deg, rgba(19, 42, 74, 0.9), rgba(10, 22, 40, 0.95));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 163, 224, 0.12);
+            border-radius: 24px;
+            padding: 50px 45px;
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            box-shadow: var(--shadow-premium);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        .contact-info-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--Quintera-secondary), var(--Quintera-accent), transparent);
+            background-size: 300% 100%;
+            animation: shimmerLine 4s ease infinite;
+        }
+
+        @keyframes shimmerLine {
+            0% { background-position: -300% 0; }
+            100% { background-position: 300% 0; }
+        }
+
+        .contact-info-box::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            right: -20%;
+            width: 60%;
+            height: 100%;
+            background: radial-gradient(ellipse, rgba(0, 163, 224, 0.06) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .contact-info-box:hover {
+            border-color: rgba(0, 163, 224, 0.3);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), var(--Quintera-glow-hover);
+            transform: translateY(-6px);
+        }
+
+        .contact-info-box > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-info-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-light);
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .contact-info-title .title-underline {
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--Quintera-secondary), var(--Quintera-accent));
+            border-radius: 2px;
+            margin-top: 10px;
+        }
+
+        /* Contact Items - Premium */
         .contact-item {
             margin-bottom: 24px;
             display: flex;
             align-items: flex-start;
-            gap: 16px;
+            gap: 18px;
+            padding: 18px 22px;
+            border-radius: 16px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid transparent;
+            cursor: default;
+            position: relative;
         }
-        .contact-item i {
-            color: var(--secondary-color);
-            font-size: 1.5rem;
-            margin-top: 4px;
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(0, 163, 224, 0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
-        .contact-item h4 {
+
+        .contact-item:hover::before {
+            opacity: 1;
+        }
+
+        .contact-item:hover {
+            background: rgba(0, 163, 224, 0.05);
+            border-color: rgba(0, 163, 224, 0.15);
+            transform: translateX(8px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-item .icon-wrapper {
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+            background: linear-gradient(135deg, rgba(0, 163, 224, 0.15), rgba(79, 195, 247, 0.05));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(0, 163, 224, 0.12);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .contact-item .icon-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 16px;
+            border: 1px solid transparent;
+            transition: all 0.5s ease;
+        }
+
+        .contact-item:hover .icon-wrapper::after {
+            border-color: var(--Quintera-secondary);
+            animation: pulseRing 1.5s ease infinite;
+        }
+
+        @keyframes pulseRing {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.2); opacity: 0; }
+        }
+
+        .contact-item:hover .icon-wrapper {
+            background: linear-gradient(135deg, rgba(0, 163, 224, 0.25), rgba(79, 195, 247, 0.1));
+            border-color: var(--Quintera-secondary);
+            transform: scale(1.05) rotate(-2deg);
+            box-shadow: 0 0 40px rgba(0, 163, 224, 0.15);
+        }
+
+        .contact-item .icon-wrapper i {
+            color: var(--Quintera-secondary);
+            font-size: 1.2rem;
+            transition: all 0.5s ease;
+        }
+
+        .contact-item:hover .icon-wrapper i {
+            transform: scale(1.1);
+            color: var(--Quintera-accent);
+        }
+
+        .contact-item .contact-label {
             color: var(--text-light);
-            font-size: 1.1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+            font-family: 'Outfit', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.5;
+        }
+
+        .contact-item .contact-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--Quintera-secondary);
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-item:hover .contact-value {
+            color: var(--Quintera-accent);
+        }
+
+        .contact-item .contact-detail {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .contact-item .contact-detail .highlight {
+            color: var(--Quintera-secondary);
+        }
+
+        /* Contact Box Footer */
+        .contact-box-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 28px;
+            margin-top: 8px;
+        }
+
+        .contact-box-footer p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .contact-box-footer .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .contact-box-footer .social-links a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.95rem;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-box-footer .social-links a::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--Quintera-secondary), var(--Quintera-accent));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .contact-box-footer .social-links a:hover::before {
+            opacity: 1;
+        }
+
+        .contact-box-footer .social-links a:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 163, 224, 0.3);
+            border-color: transparent;
+        }
+
+        .contact-box-footer .social-links a i {
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s ease;
+        }
+
+        .contact-box-footer .social-links a:hover i {
+            color: #FFFFFF;
+            transform: scale(1.1);
+        }
+
+        /* ========================================
+                   CONTACT FORM - ULTRA PREMIUM
+                ======================================== */
+        .contact-form-container {
+            background: linear-gradient(160deg, rgba(19, 42, 74, 0.9), rgba(10, 22, 40, 0.95));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 163, 224, 0.12);
+            border-radius: 24px;
+            padding: 50px 45px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-form-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--Quintera-secondary), var(--Quintera-accent), transparent);
+            background-size: 300% 100%;
+            animation: shimmerLine 4s ease infinite;
+        }
+
+        .contact-form-container:hover {
+            border-color: rgba(0, 163, 224, 0.3);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), var(--Quintera-glow-hover);
+            transform: translateY(-6px);
+        }
+
+        .contact-form-container .form-title {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-light);
             margin-bottom: 4px;
         }
-        .contact-item p {
+
+        .contact-form-container .form-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 32px;
             font-size: 0.95rem;
+            line-height: 1.7;
         }
-        .map-wrapper {
-            border-radius: var(--radius-lg);
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.82rem;
+            color: var(--text-light);
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            opacity: 0.6;
+        }
+
+        .form-label .required {
+            color: var(--Quintera-secondary);
+            margin-left: 2px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-light);
+            outline: none;
+        }
+
+        .form-control::placeholder {
+            color: var(--text-muted);
+            opacity: 0.3;
+        }
+
+        .form-control:focus {
+            border-color: var(--Quintera-secondary);
+            box-shadow: 0 0 0 6px rgba(0, 163, 224, 0.08);
+            background: rgba(0, 163, 224, 0.04);
+            transform: translateY(-1px);
+        }
+
+        .form-control:hover {
+            border-color: rgba(0, 163, 224, 0.2);
+        }
+
+        .form-control.error {
+            border-color: #ff4444;
+            box-shadow: 0 0 0 6px rgba(255, 68, 68, 0.08);
+        }
+
+        .form-control.success {
+            border-color: #00c853;
+            box-shadow: 0 0 0 6px rgba(0, 200, 83, 0.06);
+        }
+
+        .error-message {
+            color: #ff4444;
+            font-size: 0.75rem;
+            display: none;
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        /* Select */
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath fill='%2300A3E0' d='M7 10L1 4h12z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            cursor: pointer;
+            padding-right: 44px;
+        }
+
+        select.form-control option {
+            background: var(--Quintera-primary);
+            color: var(--text-light);
+            padding: 10px;
+        }
+
+        /* Textarea */
+        textarea.form-control {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        /* Submit Button - Ultra Premium */
+        .btn-submit {
+            width: 100%;
+            padding: 18px 32px;
+            background: linear-gradient(135deg, var(--Quintera-secondary), #0088B8, var(--Quintera-secondary));
+            background-size: 200% 200%;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 30px rgba(0, 163, 224, 0.3);
+            position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border-color);
-            margin-top: 50px;
-            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            animation: gradientShift 4s ease infinite;
         }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .btn-submit:hover::before {
+            left: 100%;
+        }
+
+        .btn-submit::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent);
+            pointer-events: none;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 12px 50px rgba(0, 163, 224, 0.5);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .btn-submit i {
+            transition: transform 0.4s ease;
+        }
+
+        .btn-submit:hover i {
+            transform: translateX(6px) scale(1.1);
+        }
+
+        /* ========================================
+                   MAP SECTION
+                ======================================== */
+        .map-wrapper {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 163, 224, 0.12);
+            margin-top: 60px;
+            height: 420px;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .map-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 163, 224, 0.04) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .map-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 25px;
+            background: linear-gradient(135deg, var(--Quintera-secondary), var(--Quintera-accent));
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.6s ease;
+        }
+
+        .map-wrapper:hover::after {
+            opacity: 1;
+        }
+
+        .map-wrapper:hover {
+            border-color: transparent;
+            transform: translateY(-4px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), var(--Quintera-glow-hover);
+        }
+
         .map-wrapper iframe {
             width: 100%;
             height: 100%;
             border: none;
+            position: relative;
+            z-index: 0;
+        }
+
+        /* ========================================
+                   SUCCESS OVERLAY
+                ======================================== */
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 22, 40, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 12000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .success-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .success-box {
+            background: linear-gradient(160deg, rgba(19, 42, 74, 0.95), rgba(10, 22, 40, 0.98));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 55px 50px;
+            border-radius: 28px;
+            max-width: 480px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid rgba(0, 163, 224, 0.2);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6), var(--Quintera-glow);
+            transform: scale(0.9) translateY(30px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .success-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--Quintera-secondary), var(--Quintera-accent), var(--Quintera-secondary));
+            background-size: 200% 100%;
+            animation: shimmerLine 3s ease infinite;
+        }
+
+        .success-overlay.active .success-box {
+            transform: scale(1) translateY(0);
+        }
+
+        .success-box .success-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, rgba(0, 200, 83, 0.12), rgba(0, 200, 83, 0.04));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 2px solid rgba(0, 200, 83, 0.2);
+            position: relative;
+        }
+
+        .success-box .success-icon::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 200, 83, 0.1);
+            animation: pulseRing 2s ease infinite;
+        }
+
+        .success-box .success-icon i {
+            font-size: 2.8rem;
+            color: #00c853;
+        }
+
+        .success-box h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+
+        .success-box p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 28px;
+            opacity: 0.8;
+        }
+
+        .success-box .btn-close-success {
+            padding: 14px 48px;
+            background: linear-gradient(135deg, var(--Quintera-secondary), #0088B8);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 25px rgba(0, 163, 224, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .success-box .btn-close-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0, 163, 224, 0.4);
+        }
+
+        /* ========================================
+                   ANIMATIONS
+                ======================================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes countPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .contact-info-box {
+            animation: fadeInUp 0.7s ease forwards;
+            opacity: 0;
+        }
+
+        .contact-form-container {
+            animation: fadeInUp 0.7s ease forwards;
+            opacity: 0;
+            animation-delay: 0.2s;
+        }
+
+        .map-wrapper {
+            animation: fadeInUp 0.7s ease forwards;
+            opacity: 0;
+            animation-delay: 0.3s;
+        }
+
+        /* ========================================
+                   RESPONSIVE
+                ======================================== */
+        @media (max-width: 1200px) {
+            .page-hero h1 {
+                font-size: 3.2rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .page-hero {
+                padding: 70px 0 50px;
+            }
+            .page-hero h1 {
+                font-size: 2.8rem;
+            }
+            .hero-stats {
+                gap: 30px;
+            }
+            .hero-stats .stat-number {
+                font-size: 2rem;
+            }
+            .hero-stats .stat-suffix {
+                font-size: 1.3rem;
+            }
+            .contact-info-box,
+            .contact-form-container {
+                padding: 40px 30px;
+            }
+            .contact-info-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 50px 0 40px;
+            }
+            .page-hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 20px;
+                padding-top: 20px;
+            }
+            .hero-stats .stat-item:not(:last-child)::after {
+                display: none;
+            }
+            .hero-stats .stat-number {
+                font-size: 1.8rem;
+            }
+            .hero-stats .stat-suffix {
+                font-size: 1.2rem;
+            }
+            .contact-info-box,
+            .contact-form-container {
+                padding: 30px 22px;
+            }
+            .contact-info-title {
+                font-size: 1.5rem;
+            }
+            .contact-item {
+                padding: 14px 16px;
+            }
+            .contact-item .icon-wrapper {
+                width: 44px;
+                height: 44px;
+                min-width: 44px;
+            }
+            .contact-item .icon-wrapper i {
+                font-size: 1rem;
+            }
+            .contact-item .contact-value {
+                font-size: 1.1rem;
+            }
+            .contact-form-container .form-title {
+                font-size: 1.5rem;
+            }
+            .map-wrapper {
+                height: 280px;
+                margin-top: 40px;
+            }
+            .success-box {
+                padding: 40px 24px;
+            }
+            .success-box h3 {
+                font-size: 1.5rem;
+            }
+            .success-box .success-icon {
+                width: 70px;
+                height: 70px;
+            }
+            .success-box .success-icon i {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-hero h1 {
+                font-size: 1.8rem;
+            }
+            .page-hero .hero-subtitle {
+                font-size: 0.95rem;
+            }
+            .hero-stats .stat-number {
+                font-size: 1.4rem;
+            }
+            .hero-stats .stat-suffix {
+                font-size: 1rem;
+            }
+            .hero-stats .stat-label {
+                font-size: 0.7rem;
+                letter-spacing: 1px;
+            }
+            .contact-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .contact-item .icon-wrapper {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+            }
+            .contact-item .icon-wrapper i {
+                font-size: 0.9rem;
+            }
+            .contact-item .contact-value {
+                font-size: 1rem;
+            }
+            .contact-info-box,
+            .contact-form-container {
+                padding: 24px 16px;
+            }
+            .btn-submit {
+                padding: 14px 20px;
+                font-size: 0.9rem;
+            }
+            .contact-box-footer .social-links a {
+                width: 38px;
+                height: 38px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Remove header blur */
+        header {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            background: var(--Quintera-primary) !important;
         }
     </style>
 </head>
@@ -60,121 +1111,274 @@
     <!-- Header Section (Dynamic Injection) -->
     <div id="header-placeholder"></div>
 
-    <!-- Page Hero -->
+    <!-- ========================================
+    PAGE HERO
+    ======================================== -->
     <section class="page-hero">
         <div class="container">
-            <h1>Contact Us</h1>
-            <div class="breadcrumbs">
-                <a href="./index.html">Home</a> / <span>Contact Us</span>
+            <div class="hero-content">
+                <div class="breadcrumbs">
+                    <a href="./index.html"><i class="fas fa-home"></i></a>
+                    <span class="separator">/</span>
+                    <span>Contact Us</span>
+                </div>
+                <h1>Let's Connect</h1>
+                <p class="hero-subtitle">
+                    Have questions or ready to get started? Reach out to our team of expert advisors
+                    and let's build your future together.
+                </p>
+                <!-- ========================================
+                HERO STATS WITH ANIMATED COUNTERS
+                ======================================== -->
+                <div class="hero-stats">
+                    <div class="stat-item" data-count="24" data-suffix="7">
+                        <div class="stat-number-wrapper">
+                            <span class="stat-number" id="stat-support">0</span>
+                            <span class="stat-suffix">/7</span>
+                        </div>
+                        <span class="stat-label">Support Available</span>
+                        <div class="stat-progress">
+                            <div class="stat-progress-bar" id="progress-support"></div>
+                        </div>
+                    </div>
+                    <div class="stat-item" data-count="98" data-suffix="%">
+                        <div class="stat-number-wrapper">
+                            <span class="stat-number" id="stat-satisfaction">0</span>
+                            <span class="stat-suffix">%</span>
+                        </div>
+                        <span class="stat-label">Client Satisfaction</span>
+                        <div class="stat-progress">
+                            <div class="stat-progress-bar" id="progress-satisfaction"></div>
+                        </div>
+                    </div>
+                    <div class="stat-item" data-count="5000" data-suffix="+">
+                        <div class="stat-number-wrapper">
+                            <span class="stat-number" id="stat-clients">0</span>
+                            <span class="stat-suffix">+</span>
+                        </div>
+                        <span class="stat-label">Happy Clients</span>
+                        <div class="stat-progress">
+                            <div class="stat-progress-bar" id="progress-clients"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Main Content -->
-    <section class="section-padding">
+    <!-- ========================================
+    MAIN CONTENT
+    ======================================== -->
+    <section class="section-padding" style="background-color: var(--primary-color); padding-top: 60px; padding-bottom: 80px;">
         <div class="container">
-            <div class="grid-2">
-                <!-- Contact Details -->
+
+            <div class="grid-2" style="align-items: stretch; gap: 40px;">
+                <!-- ========================================
+                CONTACT INFO
+                ======================================== -->
                 <div>
                     <div class="contact-info-box">
                         <div>
-                            <h2 style="color: var(--text-light); font-size: 2rem; margin-bottom: 30px;">Get in touch</h2>
-                            
-                            <!-- US Canada Toll-Free -->
+                            <div class="contact-info-title">
+                                Get in Touch
+                                <span class="title-underline"></span>
+                            </div>
+
+                            <!-- Toll-Free -->
                             <div class="contact-item">
-                                <i class="fas fa-phone-square-alt"></i>
+                                <div class="icon-wrapper">
+                                    <i class="fas fa-phone-square-alt"></i>
+                                </div>
                                 <div>
-                                    <h4>Toll-Free Advisor Line</h4>
-                                    <p style="font-size: 1.5rem; font-weight: 700; color: var(--secondary-color);">980-776-5292</p>
+                                    <div class="contact-label">Toll-Free Advisor Line</div>
+                                    <div class="contact-value">980-776-5292</div>
                                 </div>
                             </div>
 
-                            <!-- Local Direct -->
+                            <!-- Corporate Direct -->
                             <div class="contact-item">
-                                <i class="fas fa-phone-alt"></i>
+                                <div class="icon-wrapper">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
                                 <div>
-                                    <h4>Corporate Office Direct</h4>
-                                    <p style="font-size: 1.5rem; font-weight: 700; color: var(--secondary-color);">980-776-5292</p>
+                                    <div class="contact-label">Corporate Office Direct</div>
+                                    <div class="contact-value">980-776-5292</div>
                                 </div>
                             </div>
 
-                            <!-- Offices -->
+                            <!-- Email -->
                             <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
+                                <div class="icon-wrapper">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
                                 <div>
-                                    <h4>Advisor Office Address</h4>
-                                    <p>2009 Embassy cr Charlotte NC 28213</p>
-                                    <p style="font-size: 0.85rem; margin-top: 4px; opacity: 0.8; color: var(--text-light);">Advisor email: sales@quintera.us</p>
+                                    <div class="contact-label">Email Us</div>
+                                    <div class="contact-detail">
+                                        <span class="highlight">sales@Quintera.com</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Address -->
+                            <div class="contact-item">
+                                <div class="icon-wrapper">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <div class="contact-label">Advisor Office Address</div>
+                                    <div class="contact-detail">
+                                        2009 Embassy Dr, Charlotte NC 28213
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hours -->
+                            <div class="contact-item">
+                                <div class="icon-wrapper">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <div class="contact-label">Business Hours</div>
+                                    <div class="contact-detail">
+                                        <span class="highlight">Mon - Fri:</span> 8:00 AM - 8:00 PM EST
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div style="border-top: 1px solid var(--border-color); padding-top: 20px;">
-                            <p style="font-size: 0.9rem;">Our corporate hours are 8:00 AM to 8:00 PM, Monday through Friday. Advisors are standing by to process your requests.</p>
+                        <div class="contact-box-footer">
+                            <p>
+                                <i class="fas fa-check-circle" style="color: var(--Quintera-secondary); margin-right: 8px;"></i>
+                                Our advisors are standing by to assist you with all your insurance and financial needs.
+                            </p>
+                            <div class="social-links">
+                                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Contact Form -->
+                <!-- ========================================
+                CONTACT FORM
+                ======================================== -->
                 <div>
                     <div class="contact-form-container">
-                        <h2 style="margin-bottom: 8px;">We’d love to hear from you</h2>
-                        <p class="text-muted" style="margin-bottom: 32px;">Please fill out the request form below. An advisor will get back to you shortly.</p>
-                        
-                        <form id="contact-form">
+                        <div class="section-badge" style="margin-bottom: 16px;">
+                            <i class="fas fa-arrow-right"></i> Get Started
+                        </div>
+                        <h2 class="form-title">We'd Love to Hear From You</h2>
+                        <p class="form-subtitle">
+                            Please fill out the request form below. An advisor will get back to you within 24 hours.
+                        </p>
+
+                        <form id="contact-form" novalidate>
                             <!-- Name row -->
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label class="form-label" for="first-name">First Name *</label>
+                                    <label class="form-label" for="first-name">
+                                        First Name <span class="required">*</span>
+                                    </label>
                                     <input class="form-control" type="text" id="first-name" placeholder="John" required>
+                                    <small class="error-message">Please enter your first name</small>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label" for="last-name">Last Name *</label>
+                                    <label class="form-label" for="last-name">
+                                        Last Name <span class="required">*</span>
+                                    </label>
                                     <input class="form-control" type="text" id="last-name" placeholder="Doe" required>
+                                    <small class="error-message">Please enter your last name</small>
                                 </div>
                             </div>
 
                             <!-- Phone & Email -->
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label class="form-label" for="phone">Telephone / Mobile *</label>
-                                    <input class="form-control" type="tel" id="phone" placeholder="980-776-5292" required>
+                                    <label class="form-label" for="phone">
+                                        Telephone / Mobile <span class="required">*</span>
+                                    </label>
+                                    <input class="form-control" type="tel" id="phone" placeholder="(980) 776-5292" required>
+                                    <small class="error-message">Please enter a valid phone number</small>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label" for="email">Email *</label>
+                                    <label class="form-label" for="email">
+                                        Email <span class="required">*</span>
+                                    </label>
                                     <input class="form-control" type="email" id="email" placeholder="john.doe@example.com" required>
+                                    <small class="error-message">Please enter a valid email address</small>
                                 </div>
                             </div>
 
                             <!-- Service Selector -->
                             <div class="form-group">
-                                <label class="form-label" for="service-select">Interested Service *</label>
-                                <select class="form-control" id="service-select" required style="width: 100%; height: 42px; border: 1px solid var(--border-color); border-radius: 4px; padding: 0 10px; outline: none; background-color: var(--primary-light); font-family: 'Inter', sans-serif; font-size: 0.85rem; color: var(--text-light);">
+                                <label class="form-label" for="service-select">
+                                    Interested Service <span class="required">*</span>
+                                </label>
+                                <select class="form-control" id="service-select" required>
                                     <option value="">-- Select a Service --</option>
                                     <option value="Personal Lines Coverage">Personal Lines Coverage</option>
                                     <option value="Commercial Coverage">Commercial Coverage</option>
-                                    <option value="Residential and Commercial Real Estate Services">Residential & Commercial Real Estate</option>
+                                    <option value="Residential and Commercial Real Estate Services">Residential &amp; Commercial Real Estate</option>
                                     <option value="Policy Management">Policy Management</option>
                                     <option value="Risk Assessment">Risk Assessment</option>
                                 </select>
+                                <small class="error-message">Please select a service</small>
                             </div>
 
-                            <!-- Message / Notes -->
+                            <!-- Message -->
                             <div class="form-group">
-                                <label class="form-label" for="message">Message / Notes *</label>
-                                <textarea class="form-control" id="message" placeholder="Provide any details or notes regarding your request..." required style="height: 120px;"></textarea>
+                                <label class="form-label" for="message">
+                                    Message / Notes <span class="required">*</span>
+                                </label>
+                                <textarea class="form-control" id="message" placeholder="Tell us about your needs, goals, or any questions you have..." required></textarea>
+                                <small class="error-message">Please enter your message</small>
                             </div>
 
                             <!-- Submit Button -->
-                            <button class="btn btn-primary" type="submit" style="width: 100%;">Submit Request</button>
+                            <button class="btn-submit" type="submit">
+                                <i class="fas fa-paper-plane"></i> Send Request
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
 
+            <!-- ========================================
+            MAP
+            ======================================== -->
+            <div class="map-wrapper">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3258.689714179382!2d-80.83748968474094!3d35.24021358030549!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88541fc0d9d8a5c1%3A0x8b2e4e8e8b2e4e8e!2sCharlotte%2C%20NC%2028213!5e0!3m2!1sen!2sus!4v1700000000000"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Quintera Office Location Map">
+                </iframe>
+            </div>
 
         </div>
     </section>
+
+    <!-- ========================================
+    SUCCESS OVERLAY
+    ======================================== -->
+    <div id="success-overlay" class="success-overlay">
+        <div class="success-box">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Request Sent!</h3>
+            <p>
+                Thank you for reaching out to Quintera. Our team will review your request and an advisor
+                will contact you within 24 hours.
+            </p>
+            <button class="btn-close-success" onclick="closeSuccess()">
+                <i class="fas fa-arrow-right"></i> Continue
+            </button>
+        </div>
+    </div>
 
     <!-- Footer Section (Dynamic Injection) -->
     <div id="footer-placeholder"></div>
@@ -182,6 +1386,72 @@
     <!-- Layout Handler Script -->
     <script src="./layout.js"></script>
     <script>
+        // ========================================
+        // ANIMATED COUNTERS
+        // ========================================
+        function animateCounters() {
+            const statItems = document.querySelectorAll('.stat-item');
+            
+            statItems.forEach(item => {
+                const target = parseInt(item.getAttribute('data-count'));
+                const suffix = item.getAttribute('data-suffix');
+                const numberElement = item.querySelector('.stat-number');
+                const progressBar = item.querySelector('.stat-progress-bar');
+                
+                let current = 0;
+                const duration = 2500;
+                const steps = 60;
+                const increment = target / steps;
+                const stepTime = duration / steps;
+                
+                // Animate progress bar
+                setTimeout(() => {
+                    progressBar.classList.add('animated');
+                }, 300);
+                
+                // Animate number
+                const counter = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(counter);
+                    }
+                    numberElement.textContent = Math.floor(current);
+                }, stepTime);
+            });
+        }
+
+        // ========================================
+        // INTERSECTION OBSERVER FOR COUNTERS
+        // ========================================
+        let countersAnimated = false;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !countersAnimated) {
+                    countersAnimated = true;
+                    animateCounters();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        // Observe the hero stats section
+        const heroStats = document.querySelector('.hero-stats');
+        if (heroStats) {
+            observer.observe(heroStats);
+        }
+
+        // Fallback: if IntersectionObserver is not supported
+        setTimeout(() => {
+            if (!countersAnimated) {
+                countersAnimated = true;
+                animateCounters();
+            }
+        }, 3000);
+
+        // ========================================
+        // AUTO-FILL SERVICE FROM URL
+        // ========================================
         document.addEventListener("DOMContentLoaded", () => {
             const params = new URLSearchParams(window.location.search);
             const serviceParam = params.get("service");
@@ -189,14 +1459,116 @@
                 const selectEl = document.getElementById("service-select");
                 if (selectEl) {
                     for (let i = 0; i < selectEl.options.length; i++) {
-                        if (selectEl.options[i].value.toLowerCase() === serviceParam.toLowerCase() || 
-                            selectEl.options[i].text.toLowerCase().includes(serviceParam.toLowerCase())) {
+                        const optionText = selectEl.options[i].text.toLowerCase();
+                        const optionValue = selectEl.options[i].value.toLowerCase();
+                        const searchTerm = serviceParam.toLowerCase();
+                        if (optionValue.includes(searchTerm) || optionText.includes(searchTerm)) {
                             selectEl.selectedIndex = i;
                             break;
                         }
                     }
                 }
             }
+        });
+
+        // ========================================
+        // FORM VALIDATION & SUBMISSION
+        // ========================================
+        document.getElementById("contact-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            let isValid = true;
+            const fields = this.querySelectorAll("[required]");
+
+            fields.forEach(field => {
+                const errorMsg = field.parentElement.querySelector(".error-message");
+                if (!field.value.trim()) {
+                    field.classList.add("error");
+                    field.classList.remove("success");
+                    if (errorMsg) errorMsg.style.display = "block";
+                    isValid = false;
+                } else {
+                    field.classList.remove("error");
+                    field.classList.add("success");
+                    if (errorMsg) errorMsg.style.display = "none";
+                }
+
+                // Email validation
+                if (field.type === "email" && field.value.trim()) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(field.value.trim())) {
+                        field.classList.add("error");
+                        field.classList.remove("success");
+                        if (errorMsg) errorMsg.style.display = "block";
+                        isValid = false;
+                    }
+                }
+            });
+
+            if (isValid) {
+                // Show success overlay
+                document.getElementById("success-overlay").classList.add("active");
+                document.body.style.overflow = "hidden";
+
+                // Reset form
+                this.reset();
+                fields.forEach(field => {
+                    field.classList.remove("success", "error");
+                });
+            }
+        });
+
+        // ========================================
+        // CLOSE SUCCESS
+        // ========================================
+        function closeSuccess() {
+            document.getElementById("success-overlay").classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+        // Close success on background click
+        document.getElementById("success-overlay").addEventListener("click", function(e) {
+            if (e.target === this) {
+                closeSuccess();
+            }
+        });
+
+        // Close success with Escape key
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape") {
+                closeSuccess();
+            }
+        });
+
+        // ========================================
+        // REAL-TIME VALIDATION
+        // ========================================
+        document.querySelectorAll(".form-control").forEach(field => {
+            field.addEventListener("blur", function() {
+                const errorMsg = this.parentElement.querySelector(".error-message");
+                if (this.value.trim()) {
+                    this.classList.remove("error");
+                    this.classList.add("success");
+                    if (errorMsg) errorMsg.style.display = "none";
+                } else {
+                    this.classList.remove("success");
+                    if (this.hasAttribute("required")) {
+                        this.classList.add("error");
+                        if (errorMsg) errorMsg.style.display = "block";
+                    }
+                }
+            });
+
+            field.addEventListener("input", function() {
+                if (this.value.trim()) {
+                    this.classList.remove("error");
+                    this.classList.add("success");
+                    const errorMsg = this.parentElement.querySelector(".error-message");
+                    if (errorMsg) errorMsg.style.display = "none";
+                } else {
+                    this.classList.remove("success");
+                }
+            });
         });
     </script>
 </body>

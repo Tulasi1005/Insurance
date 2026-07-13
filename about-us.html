@@ -10,12 +10,86 @@
     <!-- Main Style Guide -->
     <link rel="stylesheet" href="./style.css">
     <style>
+        /* Quintera Brand Colors - Only colors changed, layout preserved */
+        :root {
+            --Quintera-primary: #0A1628;
+            --Quintera-secondary: #00A3E0;
+            --Quintera-accent: #4FC3F7;
+            --Quintera-gold: #F5A623;
+            --Quintera-light: #E8F4FD;
+            --Quintera-text-light: #FFFFFF;
+            --Quintera-text-muted: #B0C4DE;
+            --Quintera-border: #1A3A5C;
+        }
+
+        /* Apply Quintera colors using the existing CSS variables - DARK MODE */
+        body:not(.light-mode) {
+            --primary-color: #0A1628;
+            --primary-light: #132A4A;
+            --secondary-color: #00A3E0;
+            --secondary-hover: #0088B8;
+            --accent-color: #B0C4DE;
+            --bg-dark: #0A1628;
+            --bg-light: #0A1628;
+            --bg-white: #0F2440;
+            --text-light: #FFFFFF;
+            --text-muted: #B0C4DE;
+            --border-color: #1A3A5C;
+        }
+
+        /* Light Mode Override */
+        body.light-mode {
+            --primary-color: #E8F4FD;
+            --primary-light: #FFFFFF;
+            --secondary-color: #00A3E0;
+            --secondary-hover: #0088B8;
+            --accent-color: #1A3A5C;
+            --bg-dark: #D4E8F5;
+            --bg-light: #E8F4FD;
+            --bg-white: #FFFFFF;
+            --text-light: #0A1628;
+            --text-muted: #1A3A5C;
+            --border-color: #B0C4DE;
+        }
+
+        /* Remove header blur */
+        header {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+
+        /* ===== ELEGANT ENHANCEMENTS ===== */
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Banner with overlay - NO BLUR, CLEAR IMAGE */
         .about-banner {
             width: 100%;
             height: 380px;
             background: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-            border-bottom: 4px solid #0b132b;
+            border-bottom: 4px solid #00A3E0;
+            position: relative;
         }
+
+        .about-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(10, 22, 40, 0.70) 0%, rgba(0, 163, 224, 0.20) 100%);
+            pointer-events: none;
+        }
+
+        body.light-mode .about-banner::after {
+            background: linear-gradient(135deg, rgba(232, 244, 253, 0.70) 0%, rgba(0, 163, 224, 0.10) 100%);
+        }
+
+        /* Elegant heading with gradient underline */
         .about-heading {
             font-size: 2.2rem;
             font-weight: 700;
@@ -24,6 +98,7 @@
             margin-bottom: 24px;
             font-family: 'Outfit', sans-serif;
         }
+
         .about-subheading {
             font-size: 0.95rem;
             font-weight: 700;
@@ -32,46 +107,506 @@
             color: var(--text-light);
             font-family: 'Outfit', sans-serif;
         }
+
+        /* Enhanced text with better readability */
         .about-text {
-            font-size: 0.9rem;
-            color: var(--accent-color);
-            line-height: 1.6;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.8;
             margin-bottom: 16px;
+            letter-spacing: 0.2px;
         }
+
+        body.light-mode .about-text {
+            color: #1A3A5C;
+        }
+
+        /* Enhanced list with elegant bullets */
         .about-list {
             list-style: none;
             margin-bottom: 16px;
             padding-left: 0;
         }
+
         .about-list li {
-            font-size: 0.9rem;
-            color: var(--accent-color);
-            margin-bottom: 6px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
             position: relative;
-            padding-left: 15px;
+            padding-left: 20px;
+            transition: all 0.3s ease;
         }
+
         .about-list li::before {
-            content: "•";
-            color: var(--accent-color);
+            content: "✦";
+            color: var(--secondary-color);
             position: absolute;
             left: 0;
             font-weight: bold;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
         }
-        .left-col-img {
-            width: 100%;
-            border-radius: 4px;
+
+        .about-list li:hover {
+            transform: translateX(4px);
+            color: var(--text-light);
+        }
+
+        body.light-mode .about-list li {
+            color: #1A3A5C;
+        }
+
+        body.light-mode .about-list li:hover {
+            color: #0A1628;
+        }
+
+        /* Enhanced card with glass morphism effect */
+        .about-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            padding: 35px;
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
             overflow: hidden;
-            margin-bottom: 24px;
-            box-shadow: var(--shadow-sm);
         }
-        .left-col-img img {
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00A3E0, #4FC3F7, #00A3E0);
+            background-size: 200% 100%;
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .about-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .about-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 163, 224, 0.15);
+            border-color: #00A3E0;
+        }
+
+        body.light-mode .about-card {
+            background: #FFFFFF;
+        }
+
+        body.light-mode .about-card:hover {
+            box-shadow: 0 12px 40px rgba(0, 163, 224, 0.2);
+        }
+
+        /* Elegant gradient card for commitment section */
+        .commitment-card {
+            background: linear-gradient(145deg, #0A1A35, #0F2440);
+            border: 1px solid var(--border-color);
+            padding: 45px 40px;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .commitment-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 163, 224, 0.05) 0%, transparent 60%);
+            pointer-events: none;
+            animation: rotateGlow 20s linear infinite;
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .commitment-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 163, 224, 0.2);
+            border-color: #00A3E0;
+        }
+
+        body.light-mode .commitment-card {
+            background: linear-gradient(145deg, #E8F4FD, #D4E8F5);
+        }
+
+        body.light-mode .commitment-card:hover {
+            box-shadow: 0 12px 40px rgba(0, 163, 224, 0.25);
+        }
+
+        /* Elegant divider with gradient */
+        .elegant-divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--secondary-color), #4FC3F7, var(--secondary-color));
+            margin: 20px auto;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .elegant-divider::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            opacity: 0.6;
+            box-shadow: 0 0 20px rgba(0, 163, 224, 0.3);
+        }
+
+        /* Elegant heading with accent */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
             width: 100%;
-            display: block;
+            height: 2px;
+            background: linear-gradient(90deg, var(--secondary-color), transparent);
+            border-radius: 2px;
         }
-        .divider-line {
-            border: 0;
-            border-top: 1px solid #e2e8f0;
-            margin: 20px 0;
+
+        /* Elegant icon styling */
+        .elegant-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 163, 224, 0.1);
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            flex-shrink: 0;
+        }
+
+        .elegant-icon:hover {
+            background: var(--secondary-color);
+            color: #0A1628;
+            transform: rotate(360deg) scale(1.1);
+        }
+
+        body.light-mode .elegant-icon {
+            background: rgba(0, 163, 224, 0.1);
+            color: #00A3E0;
+        }
+
+        body.light-mode .elegant-icon:hover {
+            background: #00A3E0;
+            color: #FFFFFF;
+        }
+
+        /* Check item with icon */
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .check-item:hover {
+            background: rgba(0, 163, 224, 0.05);
+            transform: translateX(4px);
+        }
+
+        body.light-mode .check-item:hover {
+            background: rgba(0, 163, 224, 0.08);
+        }
+
+        .check-item i {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .check-item:hover i {
+            transform: scale(1.2);
+        }
+
+        /* ===== CORE VALUES - HORIZONTAL CARDS WITH ICONS ===== */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 10px;
+            margin-bottom: 50px;
+        }
+
+        .value-card-horizontal {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px 24px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card-horizontal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00A3E0, #4FC3F7, #00A3E0);
+            background-size: 200% 100%;
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .value-card-horizontal:hover::before {
+            transform: scaleX(1);
+        }
+
+        .value-card-horizontal:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 163, 224, 0.15);
+            border-color: #00A3E0;
+        }
+
+        body.light-mode .value-card-horizontal {
+            background: #FFFFFF;
+        }
+
+        body.light-mode .value-card-horizontal:hover {
+            box-shadow: 0 12px 40px rgba(0, 163, 224, 0.2);
+        }
+
+        .value-icon-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(0, 163, 224, 0.12), rgba(79, 195, 247, 0.05));
+            border: 2px solid rgba(0, 163, 224, 0.15);
+            margin-bottom: 18px;
+            transition: all 0.4s ease;
+        }
+
+        .value-card-horizontal:hover .value-icon-wrapper {
+            background: linear-gradient(135deg, rgba(0, 163, 224, 0.25), rgba(79, 195, 247, 0.1));
+            border-color: #00A3E0;
+            transform: scale(1.05) rotate(-5deg);
+        }
+
+        .value-icon-wrapper i {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            transition: all 0.4s ease;
+        }
+
+        .value-card-horizontal:hover .value-icon-wrapper i {
+            transform: scale(1.1);
+            color: #4FC3F7;
+        }
+
+        .value-number-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            color: #0A1628;
+            background: var(--secondary-color);
+            padding: 2px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        body.light-mode .value-number-badge {
+            color: #FFFFFF;
+            background: #00A3E0;
+        }
+
+        .value-card-horizontal h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .value-card-horizontal p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        body.light-mode .value-card-horizontal h3 {
+            color: #0A1628;
+        }
+
+        body.light-mode .value-card-horizontal p {
+            color: #1A3A5C;
+        }
+
+        /* Responsive for values grid */
+        @media (max-width: 992px) {
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+            .value-card-horizontal {
+                padding: 24px 20px;
+            }
+        }
+
+        /* Elegant quote styling */
+        .elegant-quote {
+            font-style: italic;
+            font-size: 1.3rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            color: #F5A623;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        .elegant-quote::before {
+            content: '"';
+            font-size: 3rem;
+            position: absolute;
+            left: -10px;
+            top: -15px;
+            color: rgba(245, 166, 35, 0.2);
+            font-family: Georgia, serif;
+        }
+
+        body.light-mode .elegant-quote {
+            color: #E0960A;
+        }
+
+        body.light-mode .elegant-quote::before {
+            color: rgba(224, 150, 10, 0.15);
+        }
+
+        /* Fix for light mode text colors */
+        body.light-mode .about-heading {
+            color: #0A1628;
+        }
+
+        body.light-mode .about-subheading {
+            color: #0A1628;
+        }
+
+        body.light-mode .container h1 {
+            color: #0A1628;
+        }
+
+        body.light-mode .container h2 {
+            color: #0A1628;
+        }
+
+        body.light-mode .container h2[style*="color: var(--secondary-color)"] {
+            color: #00A3E0 !important;
+        }
+
+        body.light-mode .about-list li {
+            color: #1A3A5C;
+        }
+
+        body.light-mode .about-list li i {
+            color: #00A3E0;
+        }
+
+        body.light-mode .about-text strong {
+            color: #00A3E0;
+        }
+
+        body.light-mode .text-light {
+            color: #0A1628;
+        }
+
+        body.light-mode .text-muted {
+            color: #1A3A5C;
+        }
+
+        body.light-mode [style*="color: var(--text-light)"] {
+            color: #0A1628 !important;
+        }
+
+        body.light-mode [style*="color: var(--secondary-color)"] {
+            color: #00A3E0 !important;
+        }
+
+        body.light-mode .about-text strong[style*="color: #F5A623"] {
+            color: #E0960A !important;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .about-banner {
+                height: 250px;
+            }
+            .about-card {
+                padding: 20px;
+            }
+            .commitment-card {
+                padding: 30px 20px;
+            }
+            .check-item {
+                padding: 6px 10px;
+            }
+            .elegant-quote {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-banner {
+                height: 200px;
+            }
+            .about-card {
+                padding: 16px;
+            }
+            .commitment-card {
+                padding: 24px 16px;
+            }
         }
     </style>
 </head>
@@ -80,120 +615,169 @@
     <!-- Header Section (Dynamic Injection) -->
     <div id="header-placeholder"></div>
 
-    <!-- Full-Width About Banner -->
+    <!-- Full-Width About Banner - CRYSTAL CLEAR IMAGE -->
     <div class="about-banner"></div>
 
     <!-- Main Content Container -->
-    <section class="section-padding" style="background-color: var(--primary-color); padding-top: 20px;">
-        <div class="container">
-            <!-- Mission Statement Header -->
-            <h1 class="about-heading">Mission Statement</h1>
-            
-            <p class="about-text" style="margin-bottom: 30px;">
-                <strong>Vision:</strong><br>
-                To be the most trusted & people-centric insurance partner, providing general insurance solutions that meet the evolving needs of our communities.
-            </p>
+    <section class="section-padding" style="background-color: var(--bg-light); padding-top: 40px; padding-bottom: 60px;">
+        <div class="container" style="max-width: 1000px;">
+            <!-- Heading Block -->
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h1 style="color: var(--secondary-color); font-size: 2.8rem; font-weight: 800; font-family: 'Outfit', sans-serif; margin-bottom: 8px; letter-spacing: 1px;">About Us</h1>
+                <p style="font-size: 1.35rem; color: var(--text-light); font-weight: 500; font-family: 'Outfit', sans-serif; letter-spacing: 1px;">
+                    <span style="color: var(--secondary-color);">✦</span> Building Confidence. Creating Opportunities. <span style="color: var(--secondary-color);">✦</span>
+                </p>
+                <div class="elegant-divider"></div>
+            </div>
 
-            <!-- Side-by-Side Content Grid -->
-            <div class="grid-2" style="align-items: flex-start; gap: 48px;">
-                
-                <!-- LEFT COLUMN -->
+            <!-- Intro Section -->
+            <div class="about-card" style="margin-bottom: 50px;">
+                <p class="about-text" style="font-size: 1.15rem; line-height: 1.8; color: var(--text-light); margin-bottom: 20px;">
+                    At <strong style="color: var(--secondary-color);">Quintera Holdings</strong>, we believe that every successful future begins with the right guidance today. Our mission is to provide comprehensive insurance solutions, strategic financial protection, and trusted advisory services that empower individuals, families, and businesses to move forward with confidence.
+                </p>
+                <p class="about-text" style="font-size: 1.15rem; line-height: 1.8; color: var(--text-light); margin-bottom: 0;">
+                    With a commitment to <strong style="color: #F5A623;">Innovation, Integrity, and Impact</strong>, we focus on understanding each client's unique needs and delivering customized solutions that provide long-term security and peace of mind.
+                </p>
+            </div>
+
+            <!-- Two Column Layout (Who We Are / Mission & Vision) -->
+            <div class="grid-2" style="align-items: flex-start; gap: 48px; margin-bottom: 60px;">
+                <!-- Left Column -->
                 <div>
-                    <div class="left-col-img">
-                        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80" alt="Family inside driving car">
+                    <h2 style="color: var(--secondary-color); font-size: 1.8rem; font-family: 'Outfit', sans-serif; margin-bottom: 20px; font-weight: 700; position: relative; display: inline-block;">
+                        Who We Are
+                        <span style="display: block; width: 40px; height: 3px; background: var(--secondary-color); margin-top: 6px; border-radius: 2px;"></span>
+                    </h2>
+                    <p class="about-text" style="margin-bottom: 16px; color: var(--text-light);">
+                        Quintera Holdings is a trusted insurance and financial advisory company dedicated to helping clients protect what matters most. We combine industry expertise with personalized service to create insurance strategies that are practical, affordable, and designed for every stage of life.
+                    </p>
+                    <p class="about-text" style="margin-bottom: 30px; color: var(--text-light);">
+                        Whether you're safeguarding your family, protecting your business, or planning for future investments, our experienced professionals are committed to providing transparent advice and dependable support.
+                    </p>
+
+                    <h2 style="color: var(--secondary-color); font-size: 1.8rem; font-family: 'Outfit', sans-serif; margin-bottom: 20px; font-weight: 700; position: relative; display: inline-block;">
+                        Why Choose Quintera?
+                        <span style="display: block; width: 40px; height: 3px; background: var(--secondary-color); margin-top: 6px; border-radius: 2px;"></span>
+                    </h2>
+                    <ul class="about-list" style="list-style: none; padding: 0;">
+                        <li class="check-item">
+                            <i class="fas fa-check-circle"></i> Personalized insurance solutions
+                        </li>
+                        <li class="check-item">
+                            <i class="fas fa-check-circle"></i> Experienced professional advisors
+                        </li>
+                        <li class="check-item">
+                            <i class="fas fa-check-circle"></i> Transparent and ethical business practices
+                        </li>
+                        <li class="check-item">
+                            <i class="fas fa-check-circle"></i> Comprehensive personal and commercial coverage
+                        </li>
+                        <li class="check-item">
+                            <i class="fas fa-check-circle"></i> Fast claims guidance and policy support
+                        </li>
+                        <li class="check-item">
+                            <i class="fas fa-check-circle"></i> Long-term relationships built on trust
+                        </li>
+                        <li class="check-item">
+                            <i class="fas fa-check-circle"></i> Customer-first approach
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Right Column -->
+                <div>
+                    <h2 style="color: var(--secondary-color); font-size: 1.8rem; font-family: 'Outfit', sans-serif; margin-bottom: 20px; font-weight: 700; position: relative; display: inline-block;">
+                        Our Mission
+                        <span style="display: block; width: 40px; height: 3px; background: var(--secondary-color); margin-top: 6px; border-radius: 2px;"></span>
+                    </h2>
+                    <div class="about-card" style="margin-bottom: 30px;">
+                        <p class="about-text" style="color: var(--text-light); margin: 0;">
+                            To deliver reliable insurance and financial solutions through exceptional service, ethical practices, and lasting client relationships while helping individuals and businesses achieve financial confidence.
+                        </p>
                     </div>
 
-                    <h4 class="about-subheading">Purpose:</h4>
-                    <p class="about-text">
-                        To provide financial protection that offers peace of mind to our customers, and support the well-being of the communities we serve.
-                    </p>
-
-                    <h4 class="about-subheading">Jamaica</h4>
-                    <p class="about-text">
-                        Quintera serves clients directly via it's offices in Kingston, Mandeville, Montego Bay, Portmore, Santa Cruz, Junction and May Pen and indirectly through partnership with a network of 24 brokers and agents island-wide.
-                    </p>
-
-                    <hr class="divider-line">
-
-                    <h4 class="about-subheading">Turks & Caicos Islands</h4>
-                    <ul class="about-list">
-                        <li>Via Agent – Quintera Brokers TCI</li>
-                    </ul>
-
-                    <hr class="divider-line">
-
-                    <h4 class="about-subheading">Dominica</h4>
-                    <ul class="about-list">
-                        <li>Via Agent – Cabrits Agencies</li>
-                    </ul>
-
-                    <hr class="divider-line">
-
-                    <h4 class="about-subheading">St. Lucia</h4>
-                    <ul class="about-list">
-                        <li>Affiliated partner: EC Global Insurance Agency.</li>
-                    </ul>
+                    <h2 style="color: var(--secondary-color); font-size: 1.8rem; font-family: 'Outfit', sans-serif; margin-bottom: 20px; font-weight: 700; position: relative; display: inline-block;">
+                        Our Vision
+                        <span style="display: block; width: 40px; height: 3px; background: var(--secondary-color); margin-top: 6px; border-radius: 2px;"></span>
+                    </h2>
+                    <div class="about-card" style="margin-bottom: 30px;">
+                        <p class="about-text" style="color: var(--text-light); margin: 0;">
+                            To become a leading insurance and financial services organization recognized for innovation, trust, and excellence, creating lasting value for clients and communities across every market we serve.
+                        </p>
+                    </div>
                 </div>
+            </div>
 
-                <!-- RIGHT COLUMN -->
-                <div>
-                    <h4 class="about-subheading" style="margin-top: 0;">Our History</h4>
-                    
-                    <p class="about-text">
-                        Quintera (previously Star International Insurance Company) was born out of the insurance agency operations of Quintera Group & Company and commenced writing business on September 1, 1981.
-                    </p>
-
-                    <p class="about-text">
-                        As a wholly owned subsidiary of Quintera Group Limited, Quintera has embraced the parent company’s values of honesty, integrity, and trust.
-                    </p>
-
-                    <p class="about-text">
-                        In 1999 Quintera acquired the National Commercial Bank owned CHIC/NCB Insurance Company. In March 2005 Quintera acquired the Jamaican portfolio of Nova Insurance Company Limited. As a result, Quintera became the largest insurer in Jamaica in 2006 (based on premium volume).
-                    </p>
-
-                    <p class="about-text">
-                        Quintera has consistently ranked amongst the top three insurers in Jamaica based on profitability and strength of balance sheet.
-                    </p>
-
-                    <p class="about-text">
-                        Quintera is licensed in accordance with The Insurance Act (2001) to write all classes of General Insurance business, namely: -
-                    </p>
-
-                    <ul class="about-list">
-                        <li>Motor Vehicle Insurance</li>
-                        <li>Property Insurance</li>
-                        <li>Personal Accident Insurance</li>
-                        <li>Pecuniary Loss Insurance</li>
-                        <li>Marine, Aviation and Transport Insurance</li>
-                        <li>Liability Insurance</li>
-                        <li>Microinsurance</li>
-                    </ul>
-
-                    <p class="about-text">
-                        Quintera protects its security via reinsurance contracts with some of the world's largest and most highly rated reinsurers including Swiss Re, Munich Re, Transatlantic Re, SCOR, QBE, Mapfre, R+V Versicherungs and Lloyds.
-                    </p>
-
-                    <p class="about-text">
-                        Quintera has invested in technology to support its operation and are widely regarded as leaders in this area, Quintera was the first insurance company in Jamaica to introduce a truly interactive web-site, which allows brokers and clients to access policy, claims and information.
-                    </p>
-
-                    <p class="about-text">
-                        A focus on efficiency combined with a commitment to excellence and a highly trained workforce has earned Quintera an enviable reputation for efficiency & customer service.
-                    </p>
-
-                    <p class="about-text">
-                        Quintera's customers consistently indicate a high level of satisfaction with its products and services via internal and independent surveys. Since 2005 the customer satisfaction index has consistently remained above 90%.
-                    </p>
-
-                    <p class="about-text">
-                        We are proud of the reputation we have built in providing excellent service to our clients in the field of general insurance.
-                    </p>
-
-                    <p class="about-text" style="font-weight: 700; color: var(--text-light); margin-top: 24px;">
-                        Quintera “Driven by Excellence - Guided by Experience”
+            <!-- ===== CORE VALUES SECTION ===== -->
+            <div style="margin-bottom: 50px;">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <h2 style="color: var(--secondary-color); font-size: 2rem; font-family: 'Outfit', sans-serif; font-weight: 700; position: relative; display: inline-block;">
+                        Our Core Values
+                        <span style="display: block; width: 50px; height: 3px; background: linear-gradient(90deg, var(--secondary-color), #4FC3F7); margin: 8px auto 0; border-radius: 2px;"></span>
+                    </h2>
+                    <p style="color: var(--text-muted); font-size: 1rem; margin-top: 12px; font-family: 'Outfit', sans-serif;">
+                        The principles that guide everything we do
                     </p>
                 </div>
 
+                <div class="values-grid">
+                    <!-- Value 1: Innovation -->
+                    <div class="value-card-horizontal">
+                        <div class="value-icon-wrapper">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <span class="value-number-badge">01</span>
+                        <h3>Innovation</h3>
+                        <p>We anticipate tomorrow's challenges and provide forward-thinking solutions that help our clients stay prepared for the future.</p>
+                    </div>
+
+                    <!-- Value 2: Integrity -->
+                    <div class="value-card-horizontal">
+                        <div class="value-icon-wrapper">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <span class="value-number-badge">02</span>
+                        <h3>Integrity</h3>
+                        <p>Honesty, transparency, and accountability guide every decision we make. Trust is earned through consistent actions and ethical practices.</p>
+                    </div>
+
+                    <!-- Value 3: Impact -->
+                    <div class="value-card-horizontal">
+                        <div class="value-icon-wrapper">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <span class="value-number-badge">03</span>
+                        <h3>Impact</h3>
+                        <p>Our success is measured by the positive difference we make in the lives of our clients, employees, and communities.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Our Commitment & Promise Section -->
+            <div class="commitment-card">
+                <h2 style="color: var(--secondary-color); font-size: 1.8rem; font-family: 'Outfit', sans-serif; margin-bottom: 20px; font-weight: 700; position: relative; display: inline-block;">
+                    Our Commitment
+                    <span style="display: block; width: 40px; height: 3px; background: var(--secondary-color); margin: 6px auto 0; border-radius: 2px;"></span>
+                </h2>
+                <p class="about-text" style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; color: var(--text-light);">
+                    At Quintera Holdings, we understand that insurance is more than a policy—it's a promise of protection when it matters most. We are committed to providing dependable guidance, responsive service, and solutions that evolve with your changing needs.<br><br>
+                    Whether you're protecting your family, expanding your business, or planning for the future, Quintera Holdings stands beside you as a trusted partner every step of the way.
+                </p>
+
+                <div class="elegant-divider" style="margin-bottom: 30px;"></div>
+
+                <h2 style="color: var(--secondary-color); font-size: 1.8rem; font-family: 'Outfit', sans-serif; margin-bottom: 10px; font-weight: 700;">Our Promise</h2>
+                <p style="font-size: 1.4rem; color: var(--text-light); font-weight: 700; font-family: 'Outfit', sans-serif; margin-bottom: 12px; letter-spacing: 3px;">
+                    <span style="color: var(--secondary-color);">INNOVATION</span>
+                    <span style="color: var(--text-muted); margin: 0 8px;">•</span>
+                    <span style="color: #F5A623;">INTEGRITY</span>
+                    <span style="color: var(--text-muted); margin: 0 8px;">•</span>
+                    <span style="color: #4FC3F7;">IMPACT</span>
+                </p>
+                <p class="about-text" style="font-size: 1rem; line-height: 1.8; max-width: 700px; margin-left: auto; margin-right: auto; margin-bottom: 24px; opacity: 0.9; color: var(--text-light);">
+                    These three principles define who we are, shape every decision we make, and inspire us to build lasting relationships based on trust, excellence, and shared success.
+                </p>
+                <p class="elegant-quote" style="margin: 0;">Protecting today. Empowering tomorrow.</p>
             </div>
         </div>
     </section>
